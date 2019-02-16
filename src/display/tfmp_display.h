@@ -21,6 +21,7 @@ public:
     DisplayBoard *display_board_;
     Display(Tfm *tfm, DisplayBoard *display_board);
     int Show();
+    void Close();
 
 };
 

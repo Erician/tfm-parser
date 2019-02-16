@@ -31,5 +31,6 @@ int main(int argc,char *argv[]) {
     }
     tfmp::Display display(tfm, display_board);
     display.Show();
+    display.Close();
     return 0;
 }

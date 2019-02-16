@@ -10,6 +10,8 @@ namespace tfmp
         const int kSizeofFixWord = 4;
         const int kBitLenFixWord = 32;
         const int kSizeofCharInfoWord = 4;
+        const int kSizeofLigKernCommand = 4;
+        const int kSizeofExtenCommand = 4;
     }
     
 } // namespace tfmp

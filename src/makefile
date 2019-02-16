@@ -23,6 +23,8 @@ include unittest/logging/makefile
 # OBJS can deal with either .cc or .c 
 OBJS += $(OBJDIR)/tfmp_tfm_data_header.o $(OBJDIR)/tfmp_tfm_data_charinfo.o 
 OBJS += $(OBJDIR)/tfmp_tfm_data.o $(OBJDIR)/tfmp_tfm_header.o 
+OBJS += $(OBJDIR)/tfmp_tfm_data_param.o $(OBJDIR)/tfmp_tfm_data_ligkern.o 
+OBJS += $(OBJDIR)/tfmp_tfm_data_exten.o $(OBJDIR)/tfmp_tfm_data_fixword_array.o
 OBJS += $(OBJDIR)/tfmp_tfm.o $(OBJDIR)/tfmp_tfmutil.o
 OBJS += $(OBJDIR)/tfmp_display_board.o $(OBJDIR)/tfmp_display.o
 OBJS += $(OBJDIR)/stringutil.o  

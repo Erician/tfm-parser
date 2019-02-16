@@ -14,7 +14,7 @@ DisplayBoard::DisplayBoard(){
 
 DisplayBoard::DisplayBoard(std::string output_file_name){
     output_file_name_ = output_file_name;
-    output_file_stream_ =  new std::ofstream(output_file_name_, std::ofstream::out | std::ofstream::app);
+    output_file_stream_ =  new std::ofstream(output_file_name_, std::ofstream::out);
     board_ = output_file_stream_;
 }
 

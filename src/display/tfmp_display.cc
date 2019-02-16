@@ -15,4 +15,8 @@ int Display::Show() {
     return 0;
 }
 
+void Display::Close() {
+    display_board_->Close();
+}
+
 } // namespace tfmp

@@ -29,6 +29,10 @@ CharInfoWord::CharInfoWord(char *bytes) {
     remainder_ = bytes[3];
 }
 
+CharInfoWord::~CharInfoWord() {
+    ;
+}
+
 int CharInfoWord::Show(tfmp::DisplayBoard *display_board) {
     display_board->Puts(std::to_string(width_index_) + "\n");
     display_board->Puts(std::to_string(height_index_) + "\n");
@@ -43,6 +47,13 @@ CharInfo::CharInfo() {
     bc_ = -1;
     ec_ = -1; 
     char_info_word_array_ = NULL;
+}
+
+CharInfo::~CharInfo() {
+    for(int i=bc_; bc_!=-1&&i<=ec_; i++) {
+        delete char_info_word_array_[i-bc_];
+    }
+    delete []char_info_word_array_;
 }
 
 int CharInfo::Parse(unsigned int bc, unsigned int ec, std::ifstream* tfm_ifs) {
