@@ -33,12 +33,38 @@ CharInfoWord::~CharInfoWord() {
     ;
 }
 
-int CharInfoWord::Show(tfmp::DisplayBoard *display_board) {
-    display_board->Puts(std::to_string(width_index_) + "\n");
-    display_board->Puts(std::to_string(height_index_) + "\n");
-    display_board->Puts(std::to_string(depth_index_) + "\n");
-    display_board->Puts(std::to_string(italic_index_) + "\n");
+int CharInfoWord::Show(tfmp::DisplayBoard *display_board, \
+             tfmp::tfm::data::FixWordArray *width, \
+             tfmp::tfm::data::FixWordArray *height, \
+             tfmp::tfm::data::FixWordArray *depth, \
+             tfmp::tfm::data::FixWordArray *italic, \
+             tfmp::tfm::data::LigKern      *lig_kern, \
+             tfmp::tfm::data::FixWordArray *kern, \
+             tfmp::tfm::data::Exten        *exten, \
+              const tfmp::tfm::data::CharInfo     *char_info) {
+
+    display_board->Puts(std::to_string(width->array_[width_index_]) + "\n");
+    display_board->Puts(std::to_string(height->array_[height_index_]) + "\n");
+    display_board->Puts(std::to_string(depth->array_[depth_index_]) + "\n");
+    display_board->Puts(std::to_string(italic->array_[italic_index_]) + "\n");
     display_board->Puts(std::to_string(tag_) + "\n");
+    switch (tag_)
+    {
+        case kNoTag:
+            break;
+        case kLigTag:
+            lig_kern->command_[remainder_]->Show(display_board);    
+            break;
+        case kListTag:
+            char_info->char_info_word_array_[remainder_]->Show(display_board, \
+            width, height, depth, italic, lig_kern, kern, exten, char_info);
+            break;
+        case kExtTag:
+            exten->commands_[remainder_]->Show(display_board);
+            break;
+        default:
+            break;
+    }
     display_board->Puts(std::to_string(remainder_) + "\n");
     return 0;
 }
@@ -69,12 +95,19 @@ int CharInfo::Parse(unsigned int bc, unsigned int ec, std::ifstream* tfm_ifs) {
     return 0;
 }
 
-int CharInfo::Show(tfmp::DisplayBoard *display_board) {
-    display_board->Puts(std::to_string(bc_) + "\n");
-    display_board->Puts(std::to_string(ec_) + "\n");
+int CharInfo::Show(tfmp::DisplayBoard *display_board, \
+             tfmp::tfm::data::FixWordArray *width, \
+             tfmp::tfm::data::FixWordArray *height, \
+             tfmp::tfm::data::FixWordArray *depth, \
+             tfmp::tfm::data::FixWordArray *italic, \
+             tfmp::tfm::data::LigKern      *lig_kern, \
+             tfmp::tfm::data::FixWordArray *kern, \
+             tfmp::tfm::data::Exten        *exten) {
+    display_board->Puts(std::to_string(bc_) + " to " + std::to_string(ec_) + "\n");
     for(int i=bc_; i<ec_; i++) {
         display_board->Puts(std::to_string(i) + "\n");
-        char_info_word_array_[i-bc_]->Show(display_board);
+        char_info_word_array_[i-bc_]->Show(display_board, \
+            width, height, depth, italic, lig_kern, kern, exten, this);
     }
     return 0;
 }

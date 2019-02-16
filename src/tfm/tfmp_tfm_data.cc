@@ -58,15 +58,17 @@ int Data::Parse(tfmp::tfm::Header *header, std::ifstream* tfm_ifs) {
 
 int Data::Show(tfmp::DisplayBoard *display_board) {
     data_header_->Show(display_board);
-    char_info_->Show(display_board);
-    width_->Show(display_board);
-    height_->Show(display_board);
-    depth_->Show(display_board);
-    italic_->Show(display_board);
-    lig_kern_->Show(display_board);
-    kern_->Show(display_board);
-    exten_->Show(display_board);
     param_->Show(display_board);
+    char_info_->Show(display_board, \
+        width_, height_, depth_, italic_, lig_kern_, kern_, exten_);
+    // width_->Show(display_board);
+    // height_->Show(display_board);
+    // depth_->Show(display_board);
+    // italic_->Show(display_board);
+    // lig_kern_->Show(display_board);
+    // kern_->Show(display_board);
+    // exten_->Show(display_board);
+    
     return 0;
 }
 

@@ -1,5 +1,5 @@
 .PHONY: clean 
-GFPARSER = ../obj/tmfp
+GFPARSER = ../obj/tfmp
 PRODUCTS = $(GFPARSER)
 default: $(PRODUCTS)
 

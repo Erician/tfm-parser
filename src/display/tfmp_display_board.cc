@@ -41,6 +41,6 @@ void DisplayBoard::Put(char c) {
 void DisplayBoard::Close(){
     output_file_stream_->close();
 }
-
+   
 
 } // namespace tfmp

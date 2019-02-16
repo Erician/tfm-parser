@@ -5,6 +5,26 @@
 #include "display/tfmp_display_board.h"
 #endif
 
+#ifndef TFMP_TFM_TFMP_TFM_DATA_HEADER_H_
+#include "tfm/tfmp_tfm_data_header.h"
+#endif
+
+#ifndef TFMP_TFM_TFMP_TFM_DATA_FIXWORD_ARRAY_H_
+#include "tfm/tfmp_tfm_data_fixword_array.h"
+#endif
+
+#ifndef TFMP_TFM_TFMP_TFM_DATA_PARAM_H_
+#include "tfm/tfmp_tfm_data_param.h"
+#endif
+
+#ifndef TFMP_TFM_TFMP_TFM_DATA_LIGKERN_H_
+#include "tfm/tfmp_tfm_data_ligkern.h"
+#endif
+
+#ifndef TFMP_TFM_TFMP_TFM_DATA_EXTEN_H_
+#include "tfm/tfmp_tfm_data_exten.h"
+#endif
+
 #include <fstream>
 
 namespace tfmp {
@@ -24,6 +44,8 @@ enum Tag {
                        The pieces are speciﬁed in exten[remainder]. */
 }; 
 
+class CharInfo;
+
 struct  CharInfoWord{
     unsigned int width_index_ : 8;
     unsigned int height_index_ : 4;
@@ -34,7 +56,15 @@ struct  CharInfoWord{
     CharInfoWord();
     CharInfoWord(char *bytes);
     virtual ~CharInfoWord();
-    int Show(tfmp::DisplayBoard *display_board);
+    int Show(tfmp::DisplayBoard *display_board, \
+             tfmp::tfm::data::FixWordArray *width, \
+             tfmp::tfm::data::FixWordArray *height, \
+             tfmp::tfm::data::FixWordArray *depth, \
+             tfmp::tfm::data::FixWordArray *italic, \
+             tfmp::tfm::data::LigKern      *lig_kern, \
+             tfmp::tfm::data::FixWordArray *kern, \
+             tfmp::tfm::data::Exten        *exten, \
+             const tfmp::tfm::data::CharInfo     *char_info);
 };
 
 
@@ -48,7 +78,14 @@ public:
     CharInfo();
     virtual ~CharInfo();
     int Parse(unsigned int bc, unsigned int ec, std::ifstream* tfm_ifs);
-    int Show(tfmp::DisplayBoard *display_board);
+    int Show(tfmp::DisplayBoard *display_board, \
+             tfmp::tfm::data::FixWordArray *width, \
+             tfmp::tfm::data::FixWordArray *height, \
+             tfmp::tfm::data::FixWordArray *depth, \
+             tfmp::tfm::data::FixWordArray *italic, \
+             tfmp::tfm::data::LigKern      *lig_kern, \
+             tfmp::tfm::data::FixWordArray *kern, \
+             tfmp::tfm::data::Exten        *exten);
 };
 
 } // namespace data    
